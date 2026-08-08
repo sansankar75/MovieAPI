@@ -8,8 +8,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-// @RestController = @Controller + @ResponseBody: every method return value
-// is serialized straight to JSON by Jackson, no view template involved.
 @RestController
 @RequestMapping("/api/screens")
 public class ScreenController {

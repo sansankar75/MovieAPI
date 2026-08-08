@@ -8,4 +8,5 @@ import org.springframework.stereotype.Repository;
 // for Actor -- no method bodies needed, Spring implements this interface at startup.
 @Repository
 public interface ActorRepository extends JpaRepository<Actor, Integer> {
+    boolean existsByName(String name);
 }

@@ -6,6 +6,8 @@ import org.springframework.stereotype.Repository;
 
 // JpaRepository already gives you save(), findById(), findAll(), deleteById(), etc.
 // for Movie -- no method bodies needed, Spring implements this interface at startup.
+// Movie = Entity type
+// Integer = PK type
 @Repository
 public interface MovieRepository extends JpaRepository<Movie, Integer> {
 }

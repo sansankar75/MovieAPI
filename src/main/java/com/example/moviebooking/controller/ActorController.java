@@ -4,12 +4,11 @@ import com.example.moviebooking.entity.Actor;
 import com.example.moviebooking.service.ActorService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-// @RestController = @Controller + @ResponseBody: every method return value
-// is serialized straight to JSON by Jackson, no view template involved.
 @RestController
 @RequestMapping("/api/actors")
 public class ActorController {
@@ -35,6 +34,7 @@ public class ActorController {
     public Actor create(@Valid @RequestBody Actor actorServiceBody) {
         return actorService.create(actorServiceBody);
     }
+
 
     @PutMapping("/{id}")
     public Actor update(@PathVariable Integer id, @Valid @RequestBody Actor actorServiceBody) {

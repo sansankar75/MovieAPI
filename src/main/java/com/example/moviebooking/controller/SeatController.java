@@ -2,14 +2,13 @@ package com.example.moviebooking.controller;
 
 import com.example.moviebooking.entity.Seat;
 import com.example.moviebooking.service.SeatService;
-import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-// @RestController = @Controller + @ResponseBody: every method return value
-// is serialized straight to JSON by Jackson, no view template involved.
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/api/seats")
 public class SeatController {

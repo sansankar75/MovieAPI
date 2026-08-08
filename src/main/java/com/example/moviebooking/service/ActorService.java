@@ -1,6 +1,7 @@
 package com.example.moviebooking.service;
 
 import com.example.moviebooking.entity.Actor;
+import com.example.moviebooking.exception.ActorAlreadyExistsException;
 import com.example.moviebooking.exception.ResourceNotFoundException;
 import com.example.moviebooking.repository.ActorRepository;
 import org.springframework.stereotype.Service;
@@ -26,6 +27,9 @@ public class ActorService {
     }
 
     public Actor create(Actor actor) {
+        if(actorRepository.existsByName(actor.getName())){
+            throw new ActorAlreadyExistsException("Given Actor Already Exists");
+        }
         return actorRepository.save(actor);
     }
 

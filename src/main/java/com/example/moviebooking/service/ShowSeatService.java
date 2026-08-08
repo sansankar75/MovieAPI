@@ -27,17 +27,4 @@ public class ShowSeatService {
         return showSeatRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("ShowSeat not found with id: " + id));
     }
-
-    // Called once when a Show is created: makes one ShowSeat row (status = AVAILABLE)
-    // per physical seat on that screen, so every seat can be tracked per-show.
-    @Transactional
-    public void generateShowSeats(Show show, List<Seat> seatsOnScreen) {
-        for (Seat seat : seatsOnScreen) {
-            ShowSeat showSeat = new ShowSeat();
-            showSeat.setShow(show);
-            showSeat.setSeat(seat);
-            showSeat.setStatus("AVAILABLE");
-            showSeatRepository.save(showSeat);
-        }
-    }
 }

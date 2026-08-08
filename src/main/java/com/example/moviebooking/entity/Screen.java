@@ -14,8 +14,6 @@ public class Screen {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    // Many screens belong to one theater. FetchType.LAZY avoids pulling the
-    // whole Theater row every time you just need a screen's id.
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "theater_id")
     private Theater theater;

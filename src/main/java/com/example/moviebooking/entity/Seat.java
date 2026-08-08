@@ -20,5 +20,5 @@ public class Seat {
 
     private String rowName;
     private Integer number;
-    private String type; // e.g. REGULAR, PREMIUM, RECLINER
+    private String type;
 }

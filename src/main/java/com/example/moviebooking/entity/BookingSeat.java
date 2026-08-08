@@ -6,7 +6,6 @@ import lombok.Setter;
 
 import java.math.BigDecimal;
 
-// Lets one Booking cover multiple seats: one row per (booking, showSeat) pair.
 @Entity
 @Table(name = "booking_seats")
 @Getter

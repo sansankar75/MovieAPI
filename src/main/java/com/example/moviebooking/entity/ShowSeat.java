@@ -4,9 +4,6 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-// This is the table that makes "don't double-book a seat" actually enforceable:
-// a physical Seat is reused across many shows, so availability has to be tracked
-// per (show, seat) pair here -- not on Seat itself.
 @Entity
 @Table(
     name = "show_seats",

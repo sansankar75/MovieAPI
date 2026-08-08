@@ -11,7 +11,7 @@ import lombok.Setter;
 public class User {
 
     @Id
-    @Column(name = "user_id")
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer userId;
 
@@ -20,10 +20,6 @@ public class User {
     private String password;
     private String language;
     private String location;
-    private String role;                     // "ADMIN" / "CUSTOMER", as seen in your data
+    private String role;
     private String gender;
-
-    // Note: your table also has a separate "id" column (integer) alongside user_id.
-    // If you actually need it, map it too -- otherwise leave it out and Hibernate
-    // won't touch it.
 }

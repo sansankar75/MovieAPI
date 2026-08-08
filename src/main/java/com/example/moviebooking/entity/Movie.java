@@ -30,22 +30,6 @@ public class Movie {
     private String posterUrl;
     private String status;
 
-    // Owning side: Hibernate auto-creates the "movie_genre" join table
-    // (movie_id, genre_id) behind the scenes -- no separate entity file needed.
-    @ManyToMany
-    @JoinTable(
-        name = "movie_genres",
-        joinColumns = @JoinColumn(name = "movie_id"),
-        inverseJoinColumns = @JoinColumn(name = "genre_id")
-    )
-    private Set<Genre> genres = new HashSet<>();
 
-    // Same pattern for the "movie_actor" join table.
-    @ManyToMany
-    @JoinTable(
-        name = "movie_actors",
-        joinColumns = @JoinColumn(name = "movie_id"),
-        inverseJoinColumns = @JoinColumn(name = "actor_id")
-    )
-    private Set<Actor> actors = new HashSet<>();
+
 }

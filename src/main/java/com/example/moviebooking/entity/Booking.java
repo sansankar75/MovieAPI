@@ -27,5 +27,5 @@ public class Booking {
 
     private LocalDateTime bookingDate = LocalDateTime.now();
     private BigDecimal totalAmount;
-    private String status = "PENDING"; // PENDING, CONFIRMED, CANCELLED
+    private String status = "PENDING";
 }
