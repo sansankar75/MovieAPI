@@ -10,11 +10,17 @@ import lombok.Setter;
 @Setter
 public class Genre {
 
+    /**
+     * Unique identifier of the genre.
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    /**
+     * Name of the genre.
+     */
     private String name;
-
-
 }
+
+

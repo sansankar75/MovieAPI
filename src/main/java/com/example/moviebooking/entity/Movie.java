@@ -15,21 +15,42 @@ import java.util.Set;
 @Setter
 public class Movie {
 
+    /**
+     * Unique identifier of the movie.
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @NotBlank
+    /**
+     * Title of the movie.
+     */
+    @NotBlank(message = "Movie title is required")
     private String title;
 
+    /**
+     * Description or synopsis of the movie.
+     */
     @Column(length = 1000)
     private String description;
 
+    /**
+     * Primary language of the movie.
+     */
     private String language;
+
+    /**
+     * Date on which the movie was released.
+     */
     private LocalDate releaseDate;
+
+    /**
+     * URL of the movie poster image.
+     */
     private String posterUrl;
+
+    /**
+     * Current status of the movie.
+     */
     private String status;
-
-
-
 }

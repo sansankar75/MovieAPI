@@ -1,9 +1,8 @@
 package com.example.moviebooking.service;
 
-
-import com.example.moviebooking.entity.*;
+import com.example.moviebooking.entity.Booking;
 import com.example.moviebooking.exception.ResourceNotFoundException;
-import com.example.moviebooking.repository.*;
+import com.example.moviebooking.repository.BookingRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,34 +11,41 @@ import java.util.List;
 public class BookingService {
 
     private final BookingRepository bookingRepository;
-    private final BookingSeatRepository bookingSeatRepository;
-    private final ShowSeatRepository showSeatRepository;
-    private final UserRepository userRepository;
-    private final ShowRepository showRepository;
 
-    public BookingService(BookingRepository bookingRepository,
-                           BookingSeatRepository bookingSeatRepository,
-                           ShowSeatRepository showSeatRepository,
-                           UserRepository userRepository,
-                           ShowRepository showRepository) {
+    public BookingService(BookingRepository bookingRepository) {
         this.bookingRepository = bookingRepository;
-        this.bookingSeatRepository = bookingSeatRepository;
-        this.showSeatRepository = showSeatRepository;
-        this.userRepository = userRepository;
-        this.showRepository = showRepository;
     }
 
+    /**
+     * Retrieves all bookings.
+     *
+     * @return list of all bookings
+     */
     public List<Booking> getAll() {
         return bookingRepository.findAll();
     }
 
+    /**
+     * Retrieves a booking by its ID.
+     *
+     * @param id unique identifier of the booking
+     * @return the booking matching the given ID
+     * @throws ResourceNotFoundException if the booking does not exist
+     */
     public Booking getById(Integer id) {
         return bookingRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Booking not found with id: " + id));
+                .orElseThrow(() ->
+                        new ResourceNotFoundException(
+                                "Booking not found with id: " + id
+                        ));
     }
 
-
-
+    /**
+     * Deletes a booking by its ID.
+     *
+     * @param id unique identifier of the booking to delete
+     * @throws ResourceNotFoundException if the booking does not exist
+     */
     public void delete(Integer id) {
         Booking existing = getById(id);
         bookingRepository.delete(existing);

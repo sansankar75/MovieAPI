@@ -18,27 +18,59 @@ public class TheaterController {
         this.theaterService = theaterService;
     }
 
+    /**
+     * Retrieves all theaters.
+     *
+     * @return list of all theaters
+     */
     @GetMapping
     public List<Theater> getAll() {
         return theaterService.getAll();
     }
 
+    /**
+     * Retrieves a theater by its ID.
+     *
+     * @param id unique identifier of the theater
+     * @return the theater matching the given ID
+     */
     @GetMapping("/{id}")
     public Theater getById(@PathVariable Integer id) {
         return theaterService.getById(id);
     }
 
+    /**
+     * Creates a new theater.
+     *
+     * @param theaterRequest theater data received in the request body
+     * @return the newly created theater
+     */
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Theater create(@Valid @RequestBody Theater theaterServiceBody) {
-        return theaterService.create(theaterServiceBody);
+    public Theater create(@Valid @RequestBody Theater theaterRequest) {
+        return theaterService.create(theaterRequest);
     }
 
+    /**
+     * Updates an existing theater.
+     *
+     * @param id unique identifier of the theater to update
+     * @param theaterRequest updated theater data received in the request body
+     * @return the updated theater
+     */
     @PutMapping("/{id}")
-    public Theater update(@PathVariable Integer id, @Valid @RequestBody Theater theaterServiceBody) {
-        return theaterService.update(id, theaterServiceBody);
+    public Theater update(
+            @PathVariable Integer id,
+            @Valid @RequestBody Theater theaterRequest) {
+
+        return theaterService.update(id, theaterRequest);
     }
 
+    /**
+     * Deletes a theater by its ID.
+     *
+     * @param id unique identifier of the theater to delete
+     */
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable Integer id) {

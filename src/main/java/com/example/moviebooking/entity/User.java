@@ -1,6 +1,9 @@
 package com.example.moviebooking.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,16 +13,55 @@ import lombok.Setter;
 @Setter
 public class User {
 
+    /**
+     * Unique identifier of the user.
+     */
     @Id
-    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer userId;
+    private Integer id;
 
+    /**
+     * Full name of the user.
+     */
+    @NotBlank(message = "Name is required")
+    @Size(max = 100, message = "Name must not exceed 100 characters")
     private String name;
+
+    /**
+     * Unique email address used to identify the user.
+     */
+    @NotBlank(message = "Email is required")
+    @Email(message = "Invalid email format")
+    @Column(nullable = false, unique = true)
     private String email;
+
+    /**
+     * Password hash of the user.
+     *
+     * The raw password must never be stored.
+     */
+    @NotBlank(message = "Password is required")
     private String password;
+
+    /**
+     * Preferred language of the user.
+     */
     private String language;
+
+    /**
+     * User's location.
+     */
     private String location;
+
+    /**
+     * Role assigned to the user.
+     */
+    @Enumerated(EnumType.STRING)
     private String role;
+
+    /**
+     * Gender of the user.
+     */
+    @Enumerated(EnumType.STRING)
     private String gender;
 }

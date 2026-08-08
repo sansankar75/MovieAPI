@@ -10,11 +10,26 @@ import lombok.Setter;
 @Setter
 public class Theater {
 
+    /**
+     * Unique identifier of the theater.
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    /**
+     * Name of the theater.
+     */
     private String name;
+
+    /**
+     * Physical address of the theater.
+     */
     private String address;
+
+    /**
+     * City where the theater is located.
+     */
     private String city;
 }
+

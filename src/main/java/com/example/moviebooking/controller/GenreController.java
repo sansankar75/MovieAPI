@@ -18,30 +18,63 @@ public class GenreController {
         this.genreService = genreService;
     }
 
+    /**
+     * Retrieves all genres.
+     *
+     * @return list of all genres
+     */
     @GetMapping
     public List<Genre> getAll() {
         return genreService.getAll();
     }
 
+    /**
+     * Retrieves a genre by its ID.
+     *
+     * @param id unique identifier of the genre
+     * @return the genre matching the given ID
+     */
     @GetMapping("/{id}")
     public Genre getById(@PathVariable Integer id) {
         return genreService.getById(id);
     }
 
+    /**
+     * Creates a new genre.
+     *
+     * @param genreRequest genre data received in the request body
+     * @return the newly created genre
+     */
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Genre create(@Valid @RequestBody Genre genreServiceBody) {
-        return genreService.create(genreServiceBody);
+    public Genre create(@Valid @RequestBody Genre genreRequest) {
+        return genreService.create(genreRequest);
     }
 
+    /**
+     * Updates an existing genre.
+     *
+     * @param id unique identifier of the genre to update
+     * @param genreRequest updated genre data received in the request body
+     * @return the updated genre
+     */
     @PutMapping("/{id}")
-    public Genre update(@PathVariable Integer id, @Valid @RequestBody Genre genreServiceBody) {
-        return genreService.update(id, genreServiceBody);
+    public Genre update(
+            @PathVariable Integer id,
+            @Valid @RequestBody Genre genreRequest) {
+
+        return genreService.update(id, genreRequest);
     }
 
+    /**
+     * Deletes a genre by its ID.
+     *
+     * @param id unique identifier of the genre to delete
+     */
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable Integer id) {
         genreService.delete(id);
     }
 }
+

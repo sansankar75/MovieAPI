@@ -18,27 +18,59 @@ public class MovieController {
         this.movieService = movieService;
     }
 
+    /**
+     * Retrieves all movies.
+     *
+     * @return list of all movies
+     */
     @GetMapping
     public List<Movie> getAll() {
         return movieService.getAll();
     }
 
+    /**
+     * Retrieves a movie by its ID.
+     *
+     * @param id unique identifier of the movie
+     * @return the movie matching the given ID
+     */
     @GetMapping("/{id}")
     public Movie getById(@PathVariable Integer id) {
         return movieService.getById(id);
     }
 
+    /**
+     * Creates a new movie.
+     *
+     * @param movieRequest movie data received in the request body
+     * @return the newly created movie
+     */
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Movie create(@Valid @RequestBody Movie movieServiceBody) {
-        return movieService.create(movieServiceBody);
+    public Movie create(@Valid @RequestBody Movie movieRequest) {
+        return movieService.create(movieRequest);
     }
 
+    /**
+     * Updates an existing movie.
+     *
+     * @param id unique identifier of the movie to update
+     * @param movieRequest updated movie data received in the request body
+     * @return the updated movie
+     */
     @PutMapping("/{id}")
-    public Movie update(@PathVariable Integer id, @Valid @RequestBody Movie movieServiceBody) {
-        return movieService.update(id, movieServiceBody);
+    public Movie update(
+            @PathVariable Integer id,
+            @Valid @RequestBody Movie movieRequest) {
+
+        return movieService.update(id, movieRequest);
     }
 
+    /**
+     * Deletes a movie by its ID.
+     *
+     * @param id unique identifier of the movie to delete
+     */
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable Integer id) {

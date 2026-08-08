@@ -18,27 +18,59 @@ public class UserController {
         this.userService = userService;
     }
 
+    /**
+     * Retrieves all users.
+     *
+     * @return list of all users
+     */
     @GetMapping
     public List<User> getAll() {
         return userService.getAll();
     }
 
+    /**
+     * Retrieves a user by its ID.
+     *
+     * @param id unique identifier of the user
+     * @return the user matching the given ID
+     */
     @GetMapping("/{id}")
     public User getById(@PathVariable Integer id) {
         return userService.getById(id);
     }
 
+    /**
+     * Creates a new user.
+     *
+     * @param userRequest user data received in the request body
+     * @return the newly created user
+     */
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public User create(@Valid @RequestBody User userServiceBody) {
-        return userService.create(userServiceBody);
+    public User create(@Valid @RequestBody User userRequest) {
+        return userService.create(userRequest);
     }
 
+    /**
+     * Updates an existing user.
+     *
+     * @param id unique identifier of the user to update
+     * @param userRequest updated user data received in the request body
+     * @return the updated user
+     */
     @PutMapping("/{id}")
-    public User update(@PathVariable Integer id, @Valid @RequestBody User userServiceBody) {
-        return userService.update(id, userServiceBody);
+    public User update(
+            @PathVariable Integer id,
+            @Valid @RequestBody User userRequest) {
+
+        return userService.update(id, userRequest);
     }
 
+    /**
+     * Deletes a user by its ID.
+     *
+     * @param id unique identifier of the user to delete
+     */
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable Integer id) {

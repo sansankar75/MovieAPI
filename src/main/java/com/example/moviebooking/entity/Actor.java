@@ -10,7 +10,6 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "actors")
-
 @Getter
 @Setter
 public class Actor {
@@ -19,14 +18,30 @@ public class Actor {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    /**
+     * Name of the actor.
+     */
     @NotBlank(message = "Name is required")
-    @Size(min = 2, max = 50, message = "Name must be between 2 to 50 characters")
+    @Size(
+            min = 2,
+            max = 50,
+            message = "Name must be between 2 and 50 characters"
+    )
     private String name;
 
-    @NotBlank
-    @Size(max = 255, message = "ImageUrl need to below 255 character")
+    /**
+     * URL of the actor's profile image.
+     */
+    @NotBlank(message = "Image URL is required")
+    @Size(
+            max = 255,
+            message = "Image URL must not exceed 255 characters"
+    )
     private String imageUrl;
+
+    /**
+     * Date of birth of the actor.
+     */
     private LocalDate dateOfBirth;
-
-
 }
+

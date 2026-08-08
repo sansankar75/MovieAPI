@@ -18,19 +18,37 @@ public class PaymentController {
         this.paymentService = paymentService;
     }
 
+    /**
+     * Retrieves all payments.
+     *
+     * @return list of all payments
+     */
     @GetMapping
     public List<Payment> getAll() {
         return paymentService.getAll();
     }
 
+    /**
+     * Retrieves a payment by its ID.
+     *
+     * @param id unique identifier of the payment
+     * @return the payment matching the given ID
+     */
     @GetMapping("/{id}")
     public Payment getById(@PathVariable Integer id) {
         return paymentService.getById(id);
     }
 
+    /**
+     * Creates a new payment.
+     *
+     * @param paymentRequest payment data received in the request body
+     * @return the newly created payment
+     */
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Payment create(@Valid @RequestBody Payment payment) {
-        return paymentService.create(payment);
+    public Payment create(@Valid @RequestBody Payment paymentRequest) {
+        return paymentService.create(paymentRequest);
     }
 }
+

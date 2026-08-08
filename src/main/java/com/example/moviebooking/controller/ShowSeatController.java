@@ -16,13 +16,25 @@ public class ShowSeatController {
         this.showSeatService = showSeatService;
     }
 
+    /**
+     * Retrieves all show seats.
+     *
+     * @return list of all show seats
+     */
     @GetMapping
     public List<ShowSeat> getAll() {
         return showSeatService.getAll();
     }
 
+    /**
+     * Retrieves a show seat by its ID.
+     *
+     * @param id unique identifier of the show seat
+     * @return the show seat matching the given ID
+     */
     @GetMapping("/{id}")
     public ShowSeat getById(@PathVariable Integer id) {
         return showSeatService.getById(id);
     }
 }
+

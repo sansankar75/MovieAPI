@@ -10,15 +10,33 @@ import lombok.Setter;
 @Setter
 public class Seat {
 
+    /**
+     * Unique identifier of the seat.
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    /**
+     * Screen to which this seat belongs.
+     */
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "screen_id")
     private Screen screen;
 
+    /**
+     * Row identifier of the seat, such as A, B, or C.
+     */
     private String rowName;
+
+    /**
+     * Seat number within the row.
+     */
     private Integer number;
+
+    /**
+     * Type of the seat, such as REGULAR or PREMIUM.
+     */
     private String type;
 }
+
