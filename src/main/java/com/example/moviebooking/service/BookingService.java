@@ -34,10 +34,7 @@ public class BookingService {
      */
     public Booking getById(Integer id) {
         return bookingRepository.findById(id)
-                .orElseThrow(() ->
-                        new ResourceNotFoundException(
-                                "Booking not found with id: " + id
-                        ));
+                .orElseThrow(() -> new ResourceNotFoundException("Booking not found with id: " + id));
     }
 
     /**

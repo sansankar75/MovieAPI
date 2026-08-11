@@ -34,10 +34,7 @@ public class PaymentService {
      */
     public Payment getById(Integer id) {
         return paymentRepository.findById(id)
-                .orElseThrow(() ->
-                        new ResourceNotFoundException(
-                                "Payment not found with id: " + id
-                        ));
+                .orElseThrow(() -> new ResourceNotFoundException("Payment not found with id: " + id));
     }
 
     /**

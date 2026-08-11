@@ -34,10 +34,7 @@ public class GenreService {
      */
     public Genre getById(Integer id) {
         return genreRepository.findById(id)
-                .orElseThrow(() ->
-                        new ResourceNotFoundException(
-                                "Genre not found with id: " + id
-                        ));
+                .orElseThrow(() -> new ResourceNotFoundException("Genre not found with id: " + id));
     }
 
     /**

@@ -34,10 +34,7 @@ public class ShowService {
      */
     public Show getById(Integer id) {
         return showRepository.findById(id)
-                .orElseThrow(() ->
-                        new ResourceNotFoundException(
-                                "Show not found with id: " + id
-                        ));
+                .orElseThrow(() -> new ResourceNotFoundException("Show not found with id: " + id));
     }
 
     /**

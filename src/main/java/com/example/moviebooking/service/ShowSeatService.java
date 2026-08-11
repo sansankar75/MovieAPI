@@ -34,10 +34,7 @@ public class ShowSeatService {
      */
     public ShowSeat getById(Integer id) {
         return showSeatRepository.findById(id)
-                .orElseThrow(() ->
-                        new ResourceNotFoundException(
-                                "Show seat not found with id: " + id
-                        ));
+                .orElseThrow(() -> new ResourceNotFoundException("Show seat not found with id: " + id));
     }
 }
 

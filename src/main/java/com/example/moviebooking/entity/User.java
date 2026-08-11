@@ -56,12 +56,10 @@ public class User {
     /**
      * Role assigned to the user.
      */
-    @Enumerated(EnumType.STRING)
     private String role;
 
     /**
      * Gender of the user.
      */
-    @Enumerated(EnumType.STRING)
     private String gender;
 }

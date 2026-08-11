@@ -34,10 +34,7 @@ public class TheaterService {
      */
     public Theater getById(Integer id) {
         return theaterRepository.findById(id)
-                .orElseThrow(() ->
-                        new ResourceNotFoundException(
-                                "Theater not found with id: " + id
-                        ));
+                .orElseThrow(() -> new ResourceNotFoundException("Theater not found with id: " + id));
     }
 
     /**

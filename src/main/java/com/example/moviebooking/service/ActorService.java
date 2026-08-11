@@ -35,10 +35,7 @@ public class ActorService {
      */
     public Actor getById(Integer id) {
         return actorRepository.findById(id)
-                .orElseThrow(() ->
-                        new ResourceNotFoundException(
-                                "Actor not found with id: " + id
-                        ));
+                .orElseThrow(() -> new ResourceNotFoundException("Actor not found with id: " + id));
     }
 
     /**
@@ -51,9 +48,7 @@ public class ActorService {
     public Actor create(Actor actor) {
 
         if (actorRepository.existsByName(actor.getName())) {
-            throw new ActorAlreadyExistsException(
-                    "Actor already exists with name: " + actor.getName()
-            );
+            throw new ActorAlreadyExistsException("Actor already exists with name: " + actor.getName());
         }
 
         return actorRepository.save(actor);
@@ -62,7 +57,7 @@ public class ActorService {
     /**
      * Updates an existing actor.
      *
-     * @param id unique identifier of the actor to update
+     * @param id      unique identifier of the actor to update
      * @param updated updated actor data
      * @return the updated actor
      * @throws ResourceNotFoundException if the actor does not exist

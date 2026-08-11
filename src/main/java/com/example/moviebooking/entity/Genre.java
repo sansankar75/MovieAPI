@@ -1,6 +1,7 @@
 package com.example.moviebooking.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -20,6 +21,7 @@ public class Genre {
     /**
      * Name of the genre.
      */
+    @Size(max = 100, message = "Name must not exceed 100 characters")
     private String name;
 }
 

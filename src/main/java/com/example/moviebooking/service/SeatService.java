@@ -34,10 +34,7 @@ public class SeatService {
      */
     public Seat getById(Integer id) {
         return seatRepository.findById(id)
-                .orElseThrow(() ->
-                        new ResourceNotFoundException(
-                                "Seat not found with id: " + id
-                        ));
+                .orElseThrow(() -> new ResourceNotFoundException("Seat not found with id: " + id));
     }
 
     /**

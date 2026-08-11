@@ -5,13 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table(
-        name = "show_seats",
-        uniqueConstraints = @UniqueConstraint(
-                name = "uk_show_seat",
-                columnNames = {"show_id", "seat_id"}
-        )
-)
+@Table(name = "show_seats", uniqueConstraints = @UniqueConstraint(name = "uk_show_seat", columnNames = {"show_id", "seat_id"}))
 @Getter
 @Setter
 public class ShowSeat {

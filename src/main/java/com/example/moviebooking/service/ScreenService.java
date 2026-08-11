@@ -34,10 +34,7 @@ public class ScreenService {
      */
     public Screen getById(Integer id) {
         return screenRepository.findById(id)
-                .orElseThrow(() ->
-                        new ResourceNotFoundException(
-                                "Screen not found with id: " + id
-                        ));
+                .orElseThrow(() -> new ResourceNotFoundException("Screen not found with id: " + id));
     }
 
     /**
