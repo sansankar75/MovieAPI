@@ -58,7 +58,7 @@ public class TheaterController {
      * @param theaterRequest updated theater data received in the request body
      * @return the updated theater
      */
-    @PutMapping("/{id}")
+    @PatchMapping("/{id}")
     public Theater update(
             @PathVariable Integer id,
             @Valid @RequestBody Theater theaterRequest) {

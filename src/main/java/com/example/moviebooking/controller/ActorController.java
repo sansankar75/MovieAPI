@@ -58,7 +58,7 @@ public class ActorController {
      * @param actorServiceBody updated actor data received in the request body
      * @return the updated actor
      */
-    @PutMapping("/{id}")
+    @PatchMapping("/{id}")
     public Actor update(
             @PathVariable Integer id,
             @Valid @RequestBody Actor actorServiceBody) {

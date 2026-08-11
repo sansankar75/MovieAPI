@@ -58,7 +58,7 @@ public class ShowController {
      * @param showRequest updated show data received in the request body
      * @return the updated show
      */
-    @PutMapping("/{id}")
+    @PatchMapping("/{id}")
     public Show update(
             @PathVariable Integer id,
             @Valid @RequestBody Show showRequest) {

@@ -58,7 +58,7 @@ public class GenreController {
      * @param genreRequest updated genre data received in the request body
      * @return the updated genre
      */
-    @PutMapping("/{id}")
+    @PatchMapping("/{id}")
     public Genre update(
             @PathVariable Integer id,
             @Valid @RequestBody Genre genreRequest) {

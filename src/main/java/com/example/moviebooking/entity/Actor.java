@@ -1,5 +1,6 @@
 package com.example.moviebooking.entity;
 
+import com.example.moviebooking.comman.EntityStatus;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -36,5 +37,12 @@ public class Actor {
      * Date of birth of the actor.
      */
     private LocalDate dateOfBirth;
+
+    /**
+     * Status of actor.
+     */
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private EntityStatus status = EntityStatus.ACTIVE;
 }
 

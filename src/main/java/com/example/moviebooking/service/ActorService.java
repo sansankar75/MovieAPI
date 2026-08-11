@@ -1,11 +1,13 @@
 package com.example.moviebooking.service;
 
+import com.example.moviebooking.comman.EntityStatus;
 import com.example.moviebooking.entity.Actor;
 import com.example.moviebooking.exception.ActorAlreadyExistsException;
 import com.example.moviebooking.exception.ResourceNotFoundException;
 import com.example.moviebooking.repository.ActorRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -23,7 +25,17 @@ public class ActorService {
      * @return list of all actors
      */
     public List<Actor> getAll() {
-        return actorRepository.findAll();
+
+        List<Actor> actors = actorRepository.findAll();
+        List<Actor> activeActors = new ArrayList<>();
+
+        for (Actor actor : actors) {
+            if (actor.getStatus().equals(EntityStatus.ACTIVE)) {
+                activeActors.add(actor);
+            }
+        }
+
+        return activeActors;
     }
 
     /**
@@ -34,8 +46,15 @@ public class ActorService {
      * @throws ResourceNotFoundException if the actor does not exist
      */
     public Actor getById(Integer id) {
-        return actorRepository.findById(id)
+        Actor actor = actorRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Actor not found with id: " + id));
+
+        // Check if actor is inactive
+        if (EntityStatus.INACTIVE.equals(actor.getStatus())) {
+            throw new ResourceNotFoundException("Actor is inactive: " + id);
+        }
+
+        return actor;
     }
 
     /**
@@ -62,7 +81,7 @@ public class ActorService {
      * @return the updated actor
      * @throws ResourceNotFoundException if the actor does not exist
      */
-    public Actor update(Integer id, Actor updated) {
+    public Actor update(Integer id, Actor updated) throws ResourceNotFoundException {
 
         Actor existing = getById(id);
 
@@ -79,8 +98,10 @@ public class ActorService {
      */
     public void delete(Integer id) {
 
-        Actor existing = getById(id);
+        Actor actor = getById(id);
 
-        actorRepository.delete(existing);
+        actor.setStatus(EntityStatus.INACTIVE);
+
+        actorRepository.save(actor);
     }
 }

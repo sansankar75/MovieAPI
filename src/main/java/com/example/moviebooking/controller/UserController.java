@@ -58,7 +58,7 @@ public class UserController {
      * @param userRequest updated user data received in the request body
      * @return the updated user
      */
-    @PutMapping("/{id}")
+    @PatchMapping("/{id}")
     public User update(
             @PathVariable Integer id,
             @Valid @RequestBody User userRequest) {

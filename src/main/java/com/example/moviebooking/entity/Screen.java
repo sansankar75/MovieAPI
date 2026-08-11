@@ -1,5 +1,6 @@
 package com.example.moviebooking.entity;
 
+import com.example.moviebooking.comman.EntityStatus;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -33,5 +34,12 @@ public class Screen {
      * Total number of seats available in the screen.
      */
     private Integer totalSeats;
+
+    /**
+     * Status of screen.
+     */
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private EntityStatus status = EntityStatus.ACTIVE;
 }
 

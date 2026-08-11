@@ -1,5 +1,6 @@
 package com.example.moviebooking.entity;
 
+import com.example.moviebooking.comman.EntityStatus;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -38,5 +39,12 @@ public class Seat {
      * Type of the seat, such as REGULAR or PREMIUM.
      */
     private String type;
+
+    /**
+     * Status of seat.
+     */
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private EntityStatus status = EntityStatus.ACTIVE;
 }
 

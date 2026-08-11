@@ -1,5 +1,6 @@
 package com.example.moviebooking.entity;
 
+import com.example.moviebooking.comman.EntityStatus;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
@@ -52,5 +53,7 @@ public class Movie {
     /**
      * Current status of the movie.
      */
-    private String status;
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private EntityStatus status = EntityStatus.ACTIVE;
 }

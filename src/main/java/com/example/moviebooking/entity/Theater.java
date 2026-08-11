@@ -1,5 +1,6 @@
 package com.example.moviebooking.entity;
 
+import com.example.moviebooking.comman.EntityStatus;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
@@ -33,5 +34,12 @@ public class Theater {
      * City where the theater is located.
      */
     private String city;
+
+    /**
+     * Status of Theater.
+     */
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private EntityStatus status = EntityStatus.ACTIVE;
 }
 

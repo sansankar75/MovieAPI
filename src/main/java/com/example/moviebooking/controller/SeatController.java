@@ -59,7 +59,7 @@ public class SeatController {
      * @param seatRequest updated seat data received in the request body
      * @return the updated seat
      */
-    @PutMapping("/{id}")
+    @PatchMapping("/{id}")
     public Seat update(
             @PathVariable Integer id,
             @Valid @RequestBody Seat seatRequest) {

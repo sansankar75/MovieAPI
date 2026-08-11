@@ -1,5 +1,6 @@
 package com.example.moviebooking.entity;
 
+import com.example.moviebooking.comman.EntityStatus;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -37,21 +38,10 @@ public class User {
 
     /**
      * Password hash of the user.
-     *
      * The raw password must never be stored.
      */
     @NotBlank(message = "Password is required")
     private String password;
-
-    /**
-     * Preferred language of the user.
-     */
-    private String language;
-
-    /**
-     * User's location.
-     */
-    private String location;
 
     /**
      * Role assigned to the user.
@@ -59,7 +49,10 @@ public class User {
     private String role;
 
     /**
-     * Gender of the user.
+     * Status of User.
      */
-    private String gender;
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private EntityStatus status = EntityStatus.ACTIVE;
+
 }

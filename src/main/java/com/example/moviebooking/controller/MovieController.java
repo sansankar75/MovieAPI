@@ -58,7 +58,7 @@ public class MovieController {
      * @param movieRequest updated movie data received in the request body
      * @return the updated movie
      */
-    @PutMapping("/{id}")
+    @PatchMapping("/{id}")
     public Movie update(
             @PathVariable Integer id,
             @Valid @RequestBody Movie movieRequest) {

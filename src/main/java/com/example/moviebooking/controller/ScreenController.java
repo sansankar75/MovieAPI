@@ -58,7 +58,7 @@ public class ScreenController {
      * @param screenRequest updated screen data received in the request body
      * @return the updated screen
      */
-    @PutMapping("/{id}")
+    @PatchMapping("/{id}")
     public Screen update(
             @PathVariable Integer id,
             @Valid @RequestBody Screen screenRequest) {

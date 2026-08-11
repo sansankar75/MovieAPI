@@ -3,6 +3,7 @@ package com.example.moviebooking.service;
 import com.example.moviebooking.entity.User;
 import com.example.moviebooking.exception.ResourceNotFoundException;
 import com.example.moviebooking.repository.UserRepository;
+import com.example.moviebooking.comman.PasswordHashing;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -44,6 +45,7 @@ public class UserService {
      * @return the newly created user
      */
     public User create(User user) {
+        user.setPassword(PasswordHashing.hash(user.getPassword()));  /* Hash password*/
         return userRepository.save(user);
     }
 
