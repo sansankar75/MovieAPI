@@ -1,10 +1,12 @@
 package com.example.moviebooking.service;
 
-import com.example.moviebooking.entity.Movie;
+import com.example.moviebooking.comman.EntityStatus;
+import com.example.moviebooking.dao.Movie;
 import com.example.moviebooking.exception.ResourceNotFoundException;
 import com.example.moviebooking.repository.MovieRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -17,12 +19,22 @@ public class MovieService {
     }
 
     /**
-     * Retrieves all movies.
+     * Retrieves all active movies.
      *
-     * @return list of all movies
+     * @return list of all active movies
      */
     public List<Movie> getAll() {
-        return movieRepository.findAll();
+
+        List<Movie> movies = movieRepository.findAll();
+        List<Movie> activeMovies = new ArrayList<>();
+
+        for (Movie movie : movies) {
+            if (movie.getStatus().equals(EntityStatus.ACTIVE)) {
+                activeMovies.add(movie);
+            }
+        }
+
+        return activeMovies;
     }
 
     /**
@@ -33,8 +45,21 @@ public class MovieService {
      * @throws ResourceNotFoundException if the movie does not exist
      */
     public Movie getById(Integer id) {
-        return movieRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Movie not found with id: " + id));
+
+        Movie movie = movieRepository.findById(id)
+                .orElseThrow(() ->
+                        new ResourceNotFoundException(
+                                "Movie not found with id: " + id
+                        ));
+
+        // Check if movie is inactive
+        if (EntityStatus.INACTIVE.equals(movie.getStatus())) {
+            throw new ResourceNotFoundException(
+                    "Movie is inactive: " + id
+            );
+        }
+
+        return movie;
     }
 
     /**
@@ -44,6 +69,9 @@ public class MovieService {
      * @return the newly created movie
      */
     public Movie create(Movie movie) {
+
+        movie.setStatus(EntityStatus.ACTIVE);
+
         return movieRepository.save(movie);
     }
 
@@ -55,7 +83,8 @@ public class MovieService {
      * @return the updated movie
      * @throws ResourceNotFoundException if the movie does not exist
      */
-    public Movie update(Integer id, Movie updated) {
+    public Movie update(Integer id, Movie updated) throws ResourceNotFoundException {
+
         Movie existing = getById(id);
 
         updated.setId(existing.getId());
@@ -70,8 +99,11 @@ public class MovieService {
      * @throws ResourceNotFoundException if the movie does not exist
      */
     public void delete(Integer id) {
+
         Movie existing = getById(id);
 
-        movieRepository.delete(existing);
+        existing.setStatus(EntityStatus.INACTIVE);
+
+        movieRepository.save(existing);
     }
 }

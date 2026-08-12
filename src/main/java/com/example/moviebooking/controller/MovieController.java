@@ -1,6 +1,6 @@
 package com.example.moviebooking.controller;
 
-import com.example.moviebooking.entity.Movie;
+import com.example.moviebooking.dao.Movie;
 import com.example.moviebooking.service.MovieService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;

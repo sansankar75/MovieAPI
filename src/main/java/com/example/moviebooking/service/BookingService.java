@@ -1,6 +1,6 @@
 package com.example.moviebooking.service;
 
-import com.example.moviebooking.entity.Booking;
+import com.example.moviebooking.dao.Booking;
 import com.example.moviebooking.exception.ResourceNotFoundException;
 import com.example.moviebooking.repository.BookingRepository;
 import org.springframework.stereotype.Service;
@@ -37,14 +37,4 @@ public class BookingService {
                 .orElseThrow(() -> new ResourceNotFoundException("Booking not found with id: " + id));
     }
 
-    /**
-     * Deletes a booking by its ID.
-     *
-     * @param id unique identifier of the booking to delete
-     * @throws ResourceNotFoundException if the booking does not exist
-     */
-    public void delete(Integer id) {
-        Booking existing = getById(id);
-        bookingRepository.delete(existing);
-    }
 }

@@ -1,6 +1,6 @@
 package com.example.moviebooking.repository;
 
-import com.example.moviebooking.entity.Show;
+import com.example.moviebooking.dao.Show;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

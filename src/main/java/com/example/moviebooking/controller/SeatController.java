@@ -1,6 +1,6 @@
 package com.example.moviebooking.controller;
 
-import com.example.moviebooking.entity.Seat;
+import com.example.moviebooking.dao.Seat;
 import com.example.moviebooking.service.SeatService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;

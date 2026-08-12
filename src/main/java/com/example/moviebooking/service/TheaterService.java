@@ -1,10 +1,12 @@
 package com.example.moviebooking.service;
 
-import com.example.moviebooking.entity.Theater;
+import com.example.moviebooking.comman.EntityStatus;
+import com.example.moviebooking.dao.Theater;
 import com.example.moviebooking.exception.ResourceNotFoundException;
 import com.example.moviebooking.repository.TheaterRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -17,12 +19,22 @@ public class TheaterService {
     }
 
     /**
-     * Retrieves all theaters.
+     * Retrieves all active theaters.
      *
-     * @return list of all theaters
+     * @return list of all active theaters
      */
     public List<Theater> getAll() {
-        return theaterRepository.findAll();
+
+        List<Theater> theaters = theaterRepository.findAll();
+        List<Theater> activeTheaters = new ArrayList<>();
+
+        for (Theater theater : theaters) {
+            if (theater.getStatus().equals(EntityStatus.ACTIVE)) {
+                activeTheaters.add(theater);
+            }
+        }
+
+        return activeTheaters;
     }
 
     /**
@@ -33,8 +45,21 @@ public class TheaterService {
      * @throws ResourceNotFoundException if the theater does not exist
      */
     public Theater getById(Integer id) {
-        return theaterRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Theater not found with id: " + id));
+
+        Theater theater = theaterRepository.findById(id)
+                .orElseThrow(() ->
+                        new ResourceNotFoundException(
+                                "Theater not found with id: " + id
+                        ));
+
+        // Check if theater is inactive
+        if (EntityStatus.INACTIVE.equals(theater.getStatus())) {
+            throw new ResourceNotFoundException(
+                    "Theater is inactive: " + id
+            );
+        }
+
+        return theater;
     }
 
     /**
@@ -44,18 +69,22 @@ public class TheaterService {
      * @return the newly created theater
      */
     public Theater create(Theater theater) {
+
+        theater.setStatus(EntityStatus.ACTIVE);
+
         return theaterRepository.save(theater);
     }
 
     /**
      * Updates an existing theater.
      *
-     * @param id unique identifier of the theater to update
+     * @param id unique identifier of the theater
      * @param updated updated theater data
      * @return the updated theater
      * @throws ResourceNotFoundException if the theater does not exist
      */
     public Theater update(Integer id, Theater updated) {
+
         Theater existing = getById(id);
 
         updated.setId(existing.getId());
@@ -70,9 +99,11 @@ public class TheaterService {
      * @throws ResourceNotFoundException if the theater does not exist
      */
     public void delete(Integer id) {
+
         Theater existing = getById(id);
 
-        theaterRepository.delete(existing);
+        existing.setStatus(EntityStatus.INACTIVE);
+
+        theaterRepository.save(existing);
     }
 }
-

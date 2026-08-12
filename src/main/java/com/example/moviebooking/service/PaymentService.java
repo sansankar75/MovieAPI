@@ -1,6 +1,6 @@
 package com.example.moviebooking.service;
 
-import com.example.moviebooking.entity.Payment;
+import com.example.moviebooking.dao.Payment;
 import com.example.moviebooking.exception.ResourceNotFoundException;
 import com.example.moviebooking.repository.PaymentRepository;
 import org.springframework.stereotype.Service;

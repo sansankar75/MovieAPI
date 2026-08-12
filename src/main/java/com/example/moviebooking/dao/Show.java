@@ -1,5 +1,6 @@
-package com.example.moviebooking.entity;
+package com.example.moviebooking.dao;
 
+import com.example.moviebooking.comman.EntityStatus;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -48,5 +49,12 @@ public class Show {
      * Scheduled end time of the show.
      */
     private LocalTime endTime;
+
+    /**
+     * Status of User.
+     */
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private EntityStatus status = EntityStatus.ACTIVE;
 }
 

@@ -1,7 +1,7 @@
 package com.example.moviebooking.service;
 
 import com.example.moviebooking.comman.EntityStatus;
-import com.example.moviebooking.entity.Actor;
+import com.example.moviebooking.dao.Actor;
 import com.example.moviebooking.exception.ActorAlreadyExistsException;
 import com.example.moviebooking.exception.ResourceNotFoundException;
 import com.example.moviebooking.repository.ActorRepository;

@@ -1,11 +1,13 @@
 package com.example.moviebooking.service;
 
-import com.example.moviebooking.entity.User;
+import com.example.moviebooking.comman.EntityStatus;
+import com.example.moviebooking.dao.User;
 import com.example.moviebooking.exception.ResourceNotFoundException;
 import com.example.moviebooking.repository.UserRepository;
 import com.example.moviebooking.comman.PasswordHashing;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -18,12 +20,22 @@ public class UserService {
     }
 
     /**
-     * Retrieves all users.
+     * Retrieves all active users.
      *
-     * @return list of all users
+     * @return list of all active users
      */
     public List<User> getAll() {
-        return userRepository.findAll();
+
+        List<User> users = userRepository.findAll();
+        List<User> activeUsers = new ArrayList<>();
+
+        for (User user : users) {
+            if (user.getStatus().equals(EntityStatus.ACTIVE)) {
+                activeUsers.add(user);
+            }
+        }
+
+        return activeUsers;
     }
 
     /**
@@ -34,8 +46,21 @@ public class UserService {
      * @throws ResourceNotFoundException if the user does not exist
      */
     public User getById(Integer id) {
-        return userRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + id));
+
+        User user = userRepository.findById(id)
+                .orElseThrow(() ->
+                        new ResourceNotFoundException(
+                                "User not found with id: " + id
+                        ));
+
+        // Check if user is inactive
+        if (EntityStatus.INACTIVE.equals(user.getStatus())) {
+            throw new ResourceNotFoundException(
+                    "User is inactive: " + id
+            );
+        }
+
+        return user;
     }
 
     /**
@@ -45,7 +70,10 @@ public class UserService {
      * @return the newly created user
      */
     public User create(User user) {
+
         user.setPassword(PasswordHashing.hash(user.getPassword()));  /* Hash password*/
+        user.setStatus(EntityStatus.ACTIVE);
+
         return userRepository.save(user);
     }
 
@@ -58,6 +86,7 @@ public class UserService {
      * @throws ResourceNotFoundException if the user does not exist
      */
     public User update(Integer id, User updated) {
+
         User existing = getById(id);
 
         updated.setId(existing.getId());
@@ -72,8 +101,11 @@ public class UserService {
      * @throws ResourceNotFoundException if the user does not exist
      */
     public void delete(Integer id) {
+
         User existing = getById(id);
 
-        userRepository.delete(existing);
+        existing.setStatus(EntityStatus.INACTIVE);
+
+        userRepository.save(existing);
     }
 }

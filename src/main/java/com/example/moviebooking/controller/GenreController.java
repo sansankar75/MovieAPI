@@ -1,6 +1,6 @@
 package com.example.moviebooking.controller;
 
-import com.example.moviebooking.entity.Genre;
+import com.example.moviebooking.dao.Genre;
 import com.example.moviebooking.service.GenreService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -66,15 +66,5 @@ public class GenreController {
         return genreService.update(id, genreRequest);
     }
 
-    /**
-     * Deletes a genre by its ID.
-     *
-     * @param id unique identifier of the genre to delete
-     */
-    @DeleteMapping("/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable Integer id) {
-        genreService.delete(id);
-    }
 }
 

@@ -1,8 +1,7 @@
 package com.example.moviebooking.controller;
 
-import com.example.moviebooking.entity.Booking;
+import com.example.moviebooking.dao.Booking;
 import com.example.moviebooking.service.BookingService;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -38,15 +37,5 @@ public class BookingController {
         return bookingService.getById(id);
     }
 
-    /**
-     * Deletes a booking by its ID.
-     *
-     * @param id unique identifier of the booking to delete
-     */
-    @DeleteMapping("/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable Integer id) {
-        bookingService.delete(id);
-    }
 }
 

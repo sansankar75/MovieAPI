@@ -1,4 +1,4 @@
-package com.example.moviebooking.entity;
+package com.example.moviebooking.dao;
 
 import com.example.moviebooking.comman.EntityStatus;
 import jakarta.persistence.*;

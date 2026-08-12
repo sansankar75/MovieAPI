@@ -1,6 +1,6 @@
 package com.example.moviebooking.service;
 
-import com.example.moviebooking.entity.Genre;
+import com.example.moviebooking.dao.Genre;
 import com.example.moviebooking.exception.ResourceNotFoundException;
 import com.example.moviebooking.repository.GenreRepository;
 import org.springframework.stereotype.Service;
@@ -63,15 +63,5 @@ public class GenreService {
         return genreRepository.save(updated);
     }
 
-    /**
-     * Deletes a genre by its ID.
-     *
-     * @param id unique identifier of the genre to delete
-     * @throws ResourceNotFoundException if the genre does not exist
-     */
-    public void delete(Integer id) {
-        Genre existing = getById(id);
-        genreRepository.delete(existing);
-    }
 }
 

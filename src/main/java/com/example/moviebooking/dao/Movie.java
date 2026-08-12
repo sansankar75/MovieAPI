@@ -1,4 +1,4 @@
-package com.example.moviebooking.entity;
+package com.example.moviebooking.dao;
 
 import com.example.moviebooking.comman.EntityStatus;
 import jakarta.persistence.*;
@@ -7,8 +7,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 @Table(name = "movies")
