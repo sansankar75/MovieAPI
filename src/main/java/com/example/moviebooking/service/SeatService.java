@@ -47,16 +47,11 @@ public class SeatService {
     public Seat getById(Integer id) {
 
         Seat seat = seatRepository.findById(id)
-                .orElseThrow(() ->
-                        new ResourceNotFoundException(
-                                "Seat not found with id: " + id
-                        ));
+                .orElseThrow(() -> new ResourceNotFoundException("Seat not found with id: " + id));
 
         // Check if seat is inactive
         if (EntityStatus.INACTIVE.equals(seat.getStatus())) {
-            throw new ResourceNotFoundException(
-                    "Seat is inactive: " + id
-            );
+            throw new ResourceNotFoundException("Seat is inactive: " + id);
         }
 
         return seat;

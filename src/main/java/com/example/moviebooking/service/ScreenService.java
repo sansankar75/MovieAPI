@@ -46,17 +46,11 @@ public class ScreenService {
      */
     public Screen getById(Integer id) {
 
-        Screen screen = screenRepository.findById(id)
-                .orElseThrow(() ->
-                        new ResourceNotFoundException(
-                                "Screen not found with id: " + id
-                        ));
+        Screen screen = screenRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Screen not found with id: " + id));
 
         // Check if screen is inactive
         if (EntityStatus.INACTIVE.equals(screen.getStatus())) {
-            throw new ResourceNotFoundException(
-                    "Screen is inactive: " + id
-            );
+            throw new ResourceNotFoundException("Screen is inactive: " + id);
         }
 
         return screen;
@@ -78,7 +72,7 @@ public class ScreenService {
     /**
      * Updates an existing screen.
      *
-     * @param id unique identifier of the screen to update
+     * @param id      unique identifier of the screen to update
      * @param updated updated screen data
      * @return the updated screen
      * @throws ResourceNotFoundException if the screen does not exist
