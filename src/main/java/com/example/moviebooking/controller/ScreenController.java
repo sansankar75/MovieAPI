@@ -66,6 +66,7 @@ public class ScreenController {
         return screenService.update(id, screenRequest);
     }
 
+
     /**
      * Deletes a screen by its ID.
      *

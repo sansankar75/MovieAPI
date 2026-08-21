@@ -1,0 +1,7 @@
+services:
+  movie-app:
+    image: movie-booking
+    environment:
+      DB_URL: ${DB_URL}
+      DB_USERNAME: ${DB_USERNAME}
+      DB_PASSWORD: ${DB_PASSWORD}
